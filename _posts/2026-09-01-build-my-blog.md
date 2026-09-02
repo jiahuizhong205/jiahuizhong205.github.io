@@ -5,20 +5,8 @@ tags: [博客, GitHub Pages, Jekyll]
 categories: [折腾]
 ---
 
-想有一个自己的博客，记录学习和踩坑。对比了几种方案后，我选了 **Jekyll + Chirpy 主题**，托管在 GitHub Pages 上——不用买服务器、不用备案，写完 Markdown 推上去就能发布。这篇记录这次从零到上线的过程，也把踩过的坑记下来。
+想有一个自己的博客，记录学习和踩坑。对比了几种方案后，我选了 **Jekyll + Chirpy 主题**，托管在 GitHub Pages 上——不用买服务器、不用备案，写完 Markdown 推上去就能发布。这第一篇blog就用来记录记录这次从零到上线的过程，也把踩过的坑记下来。
 
-## 为什么是 Jekyll + Chirpy
-
-主流的静态博客方案不少：
-
-| 方案 | 语言 | 特点 |
-| --- | --- | --- |
-| Hugo | Go | 构建最快，单二进制 |
-| Hexo | Node.js | 中文社区活跃，主题多 |
-| Jekyll | Ruby | GitHub Pages 原生支持 |
-| Astro | TypeScript | 现代前端栈 |
-
-我选 Jekyll 的原因很简单：**GitHub Pages 内置了它**，push 上去就能自动构建发布，省去「本地 build → 部署产物」这一步。主题选了 Chirpy，因为它专门为技术博客设计，深色模式、搜索、目录、评论这些刚需开箱即用，而且作者是中文开发者，文档好查。
 
 ## 搭建步骤
 
@@ -34,7 +22,7 @@ categories: [折腾]
 
 ### 3. 修改配置
 
-编辑根目录的 `_config.yml`，改这几个关键项：
+编辑根目录的 `_config.yml`，改这几个关键项（更多的项可以后续自行探索优化）：
 
 ```yaml
 lang: zh-CN              # 中文界面
@@ -49,11 +37,11 @@ url: 'https://<用户名>.github.io'
 git clone https://github.com/<用户名>/<用户名>.github.io.git
 ```
 
-之后就能在编辑器里改文件、写文章，push 后 Actions 自动构建发布。
+之后就能在编辑器里改文件、写文章（_posts下新建.md文件即可），push 后 Actions 自动构建发布。
 
 ## 踩坑：文章不显示
 
-搭好后我新建了一篇 `Hello-World.md`，push 上去却发现首页根本不显示。排查后发现，Jekyll 识别文章有两个硬性要求：
+搭好后我新建了一篇 `Hello-World.md`，push 上去却发现首页不显示。排查后发现，Jekyll 识别文章有两个硬性要求：
 
 1. **文件名必须有日期前缀**：`Hello-World.md` ❌ → `2026-09-01-Hello-World.md` ✅
 2. **顶部必须有 front matter**：
@@ -67,15 +55,7 @@ tags: [博客]
 ```
 
 少了任何一样，Jekyll 都会把文件当成普通文件跳过。
+这第一篇blog有很多技术细节是由AI帮忙补充完善的，查看代码仓库里的本markdown文件可以更直观的看到真实的文章结构要求。
 
-## 设置头像
+后续还会在本文中更新更多配置、美化细节（因为我自己也在摸索呜呜）————2026.9.1
 
-头像在 `_config.yml` 里配置。把图片放到 `assets/img/` 目录下，然后填：
-
-```yaml
-avatar: /assets/img/avatar.png
-```
-
-## 小结
-
-从零到上线，全程没装任何本地环境，主要时间花在等 Actions 构建上。以后写文章就是「新建带日期前缀的 md 文件 → push」两件事。

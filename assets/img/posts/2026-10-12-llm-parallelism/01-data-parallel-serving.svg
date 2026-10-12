@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860" role="img" aria-labelledby="title desc">
+  <title id="title">大模型推理服务中的数据并行</title>
+  <desc id="desc">请求路由器把不同请求分配给保存完整模型权重的多个副本，每个副本独立保存自己的 KV Cache。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font: 700 52px "Microsoft YaHei", "Noto Sans SC", sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 27px "Microsoft YaHei", "Noto Sans SC", sans-serif; fill: #475569; }
+      .label { font: 700 30px "Microsoft YaHei", "Noto Sans SC", sans-serif; fill: #0f172a; }
+      .body { font: 400 24px "Microsoft YaHei", "Noto Sans SC", sans-serif; fill: #334155; }
+      .small { font: 500 21px "Microsoft YaHei", "Noto Sans SC", sans-serif; fill: #64748b; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="860" fill="url(#bg)"/>
+  <text x="800" y="78" text-anchor="middle" class="title">数据并行：按请求切分</text>
+  <text x="800" y="120" text-anchor="middle" class="subtitle">每个副本保存一份完整模型；同一请求的 Prefill 与 Decode 固定在同一副本</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="260" width="310" height="320" rx="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+    <text x="235" y="315" text-anchor="middle" class="label">请求路由器</text>
+    <rect x="125" y="355" width="220" height="54" rx="16" fill="#dbeafe"/>
+    <rect x="125" y="430" width="220" height="54" rx="16" fill="#dcfce7"/>
+    <rect x="125" y="505" width="220" height="54" rx="16" fill="#fef3c7"/>
+    <text x="235" y="391" text-anchor="middle" class="body">请求 A</text>
+    <text x="235" y="466" text-anchor="middle" class="body">请求 B</text>
+    <text x="235" y="541" text-anchor="middle" class="body">请求 C</text>
+  </g>
+
+  <path d="M390 382 C480 382 485 260 580 260" fill="none" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M390 457 C480 457 485 457 580 457" fill="none" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M390 532 C480 532 485 655 580 655" fill="none" stroke="#475569" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="600" y="170" width="900" height="180" rx="28" fill="#ffffff" stroke="#60a5fa" stroke-width="4"/>
+    <rect x="600" y="367" width="900" height="180" rx="28" fill="#ffffff" stroke="#4ade80" stroke-width="4"/>
+    <rect x="600" y="565" width="900" height="180" rx="28" fill="#ffffff" stroke="#fbbf24" stroke-width="4"/>
+  </g>
+
+  <g>
+    <text x="650" y="220" class="label">副本 0</text>
+    <rect x="650" y="245" width="350" height="68" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+    <rect x="1050" y="245" width="390" height="68" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="825" y="288" text-anchor="middle" class="body">完整模型权重</text>
+    <text x="1245" y="288" text-anchor="middle" class="body">请求 A 的本地 KV Cache</text>
+
+    <text x="650" y="417" class="label">副本 1</text>
+    <rect x="650" y="442" width="350" height="68" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+    <rect x="1050" y="442" width="390" height="68" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="825" y="485" text-anchor="middle" class="body">完整模型权重</text>
+    <text x="1245" y="485" text-anchor="middle" class="body">请求 B 的本地 KV Cache</text>
+
+    <text x="650" y="615" class="label">副本 2</text>
+    <rect x="650" y="640" width="350" height="68" rx="16" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+    <rect x="1050" y="640" width="390" height="68" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="825" y="683" text-anchor="middle" class="body">完整模型权重</text>
+    <text x="1245" y="683" text-anchor="middle" class="body">请求 C 的本地 KV Cache</text>
+  </g>
+
+  <text x="800" y="815" text-anchor="middle" class="small">副本之间通常不交换 token 中间结果；增加副本主要提高并发量与系统总吞吐</text>
+</svg>

@@ -5,18 +5,14 @@ categories: [LLM, Inference]
 tags: [LLM Serving, Data Parallelism, Tensor Parallelism, Pipeline Parallelism, Expert Parallelism]
 math: true
 toc: true
-image:
-  path: /assets/img/posts/2026-10-12-llm-parallelism/01-data-parallel-serving.svg
-  alt: 大模型推理服务中的数据并行请求路由
+
 ---
 
-当一个大语言模型无法只靠一张 GPU 高效服务时，我们会遇到几种名字相似、切分对象却完全不同的并行策略。理解它们最重要的不是先记通信算子，而是先回答一个问题：
+当一个大语言模型无法只靠一张 GPU 高效服务时，我们会遇到几种名字相似、切分对象却完全不同的并行策略。
 
-> 这一次究竟把什么切开了？
+这篇blog用来辅助理解推理服务中最常见的四种策略：数据并行（Data Parallelism，DP）、张量并行（Tensor Parallelism，TP）、流水线并行（Pipeline Parallelism，PP）和专家并行（Expert Parallelism，EP）。（四种策略在训练和推理过程中都可以存在，因为推理服务少了反向传播以及update过程，实际理解上比训练简单许多）
 
-本文只讨论推理服务中最常见的四种策略：数据并行（Data Parallelism，DP）、张量并行（Tensor Parallelism，TP）、流水线并行（Pipeline Parallelism，PP）和专家并行（Expert Parallelism，EP）。
-
-需要提前说明的是，这些概念不是由四篇论文在同一时期分别“发明”的。数据并行和模型并行的思想出现得很早；本文选择的是将相应方法系统化、并对今天的大模型系统影响较大的代表性论文，然后把论文中的训练设计转换到推理服务场景中理解。
+数据并行和模型并行的思想出现得很早；我让gpt找到一些将相应方法系统化、并对今天的大模型系统影响较大的代表性论文，然后把论文中的训练设计转换到推理服务场景中理解。
 
 | 策略 | 切分对象 | 一个请求如何使用多卡 | 推理服务中的主要目标 |
 |---|---|---|---|
@@ -35,7 +31,7 @@ image:
 
 ![推理服务中的数据并行](/assets/img/posts/2026-10-12-llm-parallelism/01-data-parallel-serving.svg)
 
-_图 1：推理服务中的数据并行。不同请求被路由到不同模型副本；每个副本独立维护本地的 KV Cache。本文绘制。_
+_图 1：推理服务中的数据并行。不同请求被路由到不同模型副本；每个副本独立维护本地的 KV Cache。GPT绘制。_
 
 假设一份模型可以放进一张 GPU，三张 GPU 可以分别保存三份完整权重：
 
@@ -76,9 +72,11 @@ DP 主要增加：
 
 它通常不能降低单个请求的计算量，也不能帮助一份过大的模型放进单卡。模型放不下时，要使用下面的 TP 或 PP。
 
+笔者按：我的理解就是把同一个模型复制n份，然后各自做自己的事情，不是很高明的方法，因为效果的提升对应着空间的消耗，真正的收益我感觉不高。
+
 ## 二、张量并行：切分一层中的矩阵
 
-[Megatron-LM](https://arxiv.org/abs/1909.08053) 系统化了 Transformer 的层内模型并行。它不把整个 Transformer 层分给某张卡，而是把同一层里的权重矩阵切开，让多张 GPU 共同完成这一层。
+[Megatron-LM](https://arxiv.org/abs/1909.08053) 系统化了 Transformer 的层内模型并行。把同一层里的权重矩阵切开，让多张 GPU 共同完成这一层，而不是把整个 Transformer 层分给某张卡。
 
 ![Megatron-LM 中的自注意力张量并行](/assets/img/posts/2026-10-12-llm-parallelism/02-tensor-parallel-self-attention.png)
 
@@ -153,13 +151,15 @@ TP 的核心可以概括为：
 
 > 权重少存一点，计算少做一点，但一个 token 的每一层都需要多卡通信。
 
+就是说可以将模型的计算任务分配到多张GPU上，降低单卡计算任务但是额外多出来通信。
+
 ## 三、流水线并行：切分 Transformer 层
 
 [GPipe](https://arxiv.org/abs/1811.06965) 将顺序网络划分为多个连续 stage，并用 micro-batch 填充流水线。论文主要讨论训练，但“按层切分模型”的基本结构同样适用于推理。
 
 ![GPipe 的流水线并行时序](/assets/img/posts/2026-10-12-llm-parallelism/03-pipeline-parallelism.png)
 
-_图 3：GPipe 的 micro-batch 流水线。$F$ 表示前向计算，$B$ 表示反向计算，中间空白区域是 pipeline bubble。推理服务只保留 $F$ 所代表的前向路径。图源：GPipe Figure 2(c)。_
+_图 3：GPipe 的 micro-batch 流水线。$F$ 表示前向计算，$B$ 表示反向计算，中间空白区域是 pipeline bubble。推理服务只保留 $F$ 所代表的前向路径。其中F前一个下标表示流水线 stage，也就是模型分区，后一个下标表示micro-batch（micro-batch 是从一个 batch 中拆出来的一小批样本或序列）编号。图源：GPipe Figure 2(c)。_
 
 ### 1. 模型怎样按层切开
 

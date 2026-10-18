@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920">
+<rect width="100%" height="100%" fill="white"/>
+<text x="60" y="65" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="42" font-weight="700" fill="#172b4d">Batch、Request、Prompt 与 Token</text>
+<text x="60" y="120" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">先考虑文本输入、每个请求生成一份回答的情形。Token 同时存在于输入与输出中。</text>
+<rect x="55" y="175" width="1390" height="590" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+<text x="90" y="218" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">本轮 Batch：一起参与计算的请求集合</text>
+<text x="90" y="265" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">成员可以随调度变化；batch size = 本轮请求数</text>
+<rect x="85" y="310" width="426" height="415" rx="20" fill="white" stroke="#bfdbfe" stroke-width="2"/>
+<text x="111" y="351" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#2563eb">请求 A</text>
+<text x="111" y="401" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#526582">一次生成任务 + 生成设置</text>
+<rect x="105" y="443" width="386" height="107" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="125" y="476" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#2563eb">输入 Prompt</text>
+<text x="125" y="519" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输入 token：x1, x2, …, xn</text>
+<polyline points="298,563 298,589" fill="none" stroke="#2563eb" stroke-width="3"/>
+<polygon points="298,589 291.7674679981454,577.5914266954252 304.2325320018546,577.5914266954252" fill="#2563eb"/>
+<rect x="105" y="603" width="386" height="101" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="125" y="636" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#2563eb">输出回答</text>
+<text x="125" y="677" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输出 token：y1, y2, …</text>
+<rect x="537" y="310" width="426" height="415" rx="20" fill="white" stroke="#99f6e4" stroke-width="2"/>
+<text x="563" y="351" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#0f766e">请求 B</text>
+<text x="563" y="401" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#526582">一次生成任务 + 生成设置</text>
+<rect x="557" y="443" width="386" height="107" rx="12" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+<text x="577" y="476" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#0f766e">输入 Prompt</text>
+<text x="577" y="519" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输入 token：x1, x2, …, xn</text>
+<polyline points="750,563 750,589" fill="none" stroke="#0f766e" stroke-width="3"/>
+<polygon points="750,589 743.7674679981453,577.5914266954252 756.2325320018547,577.5914266954252" fill="#0f766e"/>
+<rect x="557" y="603" width="386" height="101" rx="12" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+<text x="577" y="636" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#0f766e">输出回答</text>
+<text x="577" y="677" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输出 token：y1, y2, …</text>
+<rect x="989" y="310" width="426" height="415" rx="20" fill="white" stroke="#fed7aa" stroke-width="2"/>
+<text x="1015" y="351" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#c2410c">请求 C</text>
+<text x="1015" y="401" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#526582">一次生成任务 + 生成设置</text>
+<rect x="1009" y="443" width="386" height="107" rx="12" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+<text x="1029" y="476" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#c2410c">输入 Prompt</text>
+<text x="1029" y="519" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输入 token：x1, x2, …, xn</text>
+<polyline points="1202,563 1202,589" fill="none" stroke="#c2410c" stroke-width="3"/>
+<polygon points="1202,589 1195.7674679981453,577.5914266954252 1208.2325320018547,577.5914266954252" fill="#c2410c"/>
+<rect x="1009" y="603" width="386" height="101" rx="12" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+<text x="1029" y="636" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#c2410c">输出回答</text>
+<text x="1029" y="677" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="400" fill="#172b4d">输出 token：y1, y2, …</text>
+<text x="70" y="823" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">Prompt 可以包含系统提示词、历史对话与当前问题；历史回答会成为下一轮的输入。</text>
+<text x="70" y="867" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#526582">图示表达逻辑关系，不表示这些输入、输出 token 会在同一轮全部计算。</text>
+</svg>

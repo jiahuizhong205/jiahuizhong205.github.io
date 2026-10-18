@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="890" viewBox="0 0 1500 890">
+<rect width="100%" height="100%" fill="white"/>
+<text x="60" y="65" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="42" font-weight="700" fill="#172b4d">SGLang 与 vLLM 分别处于哪一层？</text>
+<text x="60" y="120" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">按职责理解：这是概念上的划分，各层可以组合，并非每次调用都必须逐层经过。</text>
+<rect x="60" y="180" width="1380" height="150" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="95" y="228" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#172b4d">应用编排层</text>
+<text x="95" y="286" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">组织任务、工具调用与提示词</text>
+<text x="760" y="256" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">LangChain / DSPy</text>
+<rect x="60" y="380" width="1380" height="150" rx="20" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+<text x="95" y="428" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#172b4d">程序表达层</text>
+<text x="95" y="486" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">表达生成、选择、分支与同步</text>
+<text x="760" y="456" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">SGLang 前端 / LMQL / Guidance</text>
+<rect x="60" y="580" width="1380" height="150" rx="20" fill="#faf5ff" stroke="#e9d5ff" stroke-width="2"/>
+<text x="95" y="628" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#172b4d">推理执行层</text>
+<text x="95" y="686" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">执行 prefill / decode，管理 KV 与调度</text>
+<text x="760" y="656" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">SGLang Runtime / vLLM</text>
+<polyline points="750,335 750,370" fill="none" stroke="#91a3bd" stroke-width="3"/>
+<polygon points="750,370 743.7674679981453,358.5914266954252 756.2325320018547,358.5914266954251" fill="#91a3bd"/>
+<polyline points="750,535 750,570" fill="none" stroke="#91a3bd" stroke-width="3"/>
+<polygon points="750,570 743.7674679981453,558.5914266954252 756.2325320018547,558.5914266954252" fill="#91a3bd"/>
+<rect x="60" y="770" width="1380" height="75" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+<text x="750" y="807" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#172b4d">完整 SGLang = 前端语言 + 与之协同设计的运行时；vLLM 主要对应运行时这一侧。</text>
+</svg>

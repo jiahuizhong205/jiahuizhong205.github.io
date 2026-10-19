@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="910" viewBox="0 0 1500 910">
+<rect width="100%" height="100%" fill="white"/>
+<text x="60" y="65" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="42" font-weight="700" fill="#172b4d">调度器比较的是预计 TTFT</text>
+<text x="60" y="122" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">对每个候选 prefill 实例估时，再选择满足约束且预计更快的执行位置。</text>
+<rect x="60" y="190" width="420" height="140" rx="20" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="270" y="234" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">缓存传输时间</text>
+<text x="270" y="289" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#526582">搬运量与当前网络状态</text>
+<rect x="540" y="190" width="420" height="140" rx="20" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
+<text x="750" y="234" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">本地排队时间</text>
+<text x="750" y="289" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#526582">已有请求的预计执行时间</text>
+<rect x="1020" y="190" width="420" height="140" rx="20" fill="#faf5ff" stroke="#e9d5ff" stroke-width="2"/>
+<text x="1230" y="234" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#172b4d">Prefill 计算时间</text>
+<text x="1230" y="289" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#526582">离线数据拟合的回归模型</text>
+<polyline points="270,345 605,425" fill="none" stroke="#91a3bd" stroke-width="3"/>
+<polygon points="605,425 592.4557891495509,428.4121509549659 595.3511079278179,416.28800357097293" fill="#91a3bd"/>
+<polyline points="750,345 750,425" fill="none" stroke="#91a3bd" stroke-width="3"/>
+<polygon points="750,425 743.7674679981453,413.5914266954252 756.2325320018547,413.5914266954251" fill="#91a3bd"/>
+<polyline points="1230,345 895,425" fill="none" stroke="#91a3bd" stroke-width="3"/>
+<polygon points="895,425 904.6488920721821,416.28800357097293 907.5442108504491,428.4121509549659" fill="#91a3bd"/>
+<rect x="340" y="435" width="820" height="100" rx="20" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+<text x="750" y="485" text-anchor="middle" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#172b4d">预计 TTFT = 传输 + 排队 + Prefill</text>
+<text x="70" y="590" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="400" fill="#526582">纯示意例子：两个节点复用同样长的前缀，B 需要先获取远端缓存。</text>
+<rect x="70" y="630" width="1360" height="72" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+<text x="105" y="666" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#172b4d">节点 A：本地命中，较繁忙</text>
+<text x="775" y="666" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#172b4d">0 + 3 + 0.3 = 3.3 秒</text>
+<rect x="70" y="720" width="1360" height="72" rx="14" fill="#f0fdfa" stroke="#5eead4" stroke-width="2"/>
+<text x="105" y="756" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#0f766e">节点 B：需要搬运，较空闲</text>
+<text x="775" y="756" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="27" font-weight="700" fill="#0f766e">0.4 + 0.1 + 0.3 = 0.8 秒</text>
+<text x="70" y="854" text-anchor="start" dominant-baseline="central" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#526582">示例数字不来自论文实验；最终还要检查 TTFT 与 decode 的 TBT 是否满足 SLO。</text>
+</svg>
